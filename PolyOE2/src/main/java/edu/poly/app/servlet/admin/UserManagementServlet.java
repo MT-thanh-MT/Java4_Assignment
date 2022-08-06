@@ -1,4 +1,4 @@
-package edu.poly.app.servlet;
+package edu.poly.app.servlet.admin;
 
 import edu.poly.app.model.Users;
 import edu.poly.app.service.UserService;
@@ -10,8 +10,8 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet({"/user/index", "/user/edit/*", "/user/create", "/user/update", "/user/delete", "/user/reset"})
-public class UserServlet extends HttpServlet {
+@WebServlet({"/Admin/user/index", "/Admin/user/edit/*", "/Admin/user/create", "/Admin/user/update", "/Admin/user/delete", "/Admin/user/reset"})
+public class UserManagementServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private final UserService us = new UserService();
 
@@ -22,7 +22,7 @@ public class UserServlet extends HttpServlet {
             editUser(request);
         }
         findAll(request, response);
-        request.getRequestDispatcher("/views/user.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/admin/user.jsp").forward(request, response);
     }
 
     @Override
@@ -36,7 +36,7 @@ public class UserServlet extends HttpServlet {
             deleteUser(request);
         }
         findAll(request, response);
-        request.getRequestDispatcher("/views/user.jsp").forward(request, response);
+        request.getRequestDispatcher("/views/admin/user.jsp").forward(request, response);
     }
     private void findAll(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {

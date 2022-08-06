@@ -1,4 +1,4 @@
-package edu.poly.app.servlet;
+package edu.poly.app.filter;
 
 import java.io.IOException;
 

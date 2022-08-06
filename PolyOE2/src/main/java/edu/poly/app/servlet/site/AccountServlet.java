@@ -1,4 +1,4 @@
-package edu.poly.app.servlet;
+package edu.poly.app.servlet.site;
 
 import edu.poly.app.common.CookieUtils;
 import edu.poly.app.model.LoginUser;
@@ -16,13 +16,18 @@ import java.io.IOException;
         "/account/change-password", "/account/edit-profile"})
 public class AccountServlet extends HttpServlet {
     private final UserService us = new UserService();
+    private final UserService userService = new UserService();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String uri = request.getRequestURI();
         if (uri.contains("sign-in")) {
             signInGet(request, response);
         } else if (uri.contains("sign-up")) {
-            request.getRequestDispatcher("/views/register.jsp").forward(request, response);
+            request.getRequestDispatcher("/views/site/account/register.jsp").forward(request, response);
+        } else if (uri.contains("sign-out")) {
+            request.getSession().removeAttribute("username");
+            request.getSession().removeAttribute("isAdmin");
+            response.sendRedirect(request.getContextPath() + "/HomePageServlet");
         }
     }
     @Override
@@ -32,49 +37,52 @@ public class AccountServlet extends HttpServlet {
             signInPost(request, response);
         } else if (uri.contains("sign-up")) {
             createUser(request);
-            request.getRequestDispatcher("/views/register.jsp").forward(request, response);
+            request.getRequestDispatcher("/views/site/account/register.jsp").forward(request, response);
         }
     }
     private void signInGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String username = CookieUtils.get("username", request);
+        Users users = userService.findByID(username);
         if (username != null && !username.equals("")) {
-            request.setAttribute("massage",
-                    "Login successfuly!!!");
+            request.setAttribute("massage","Login successfuly!!!");
             HttpSession session = request.getSession();
             session.setAttribute("username", username);
-            response.sendRedirect(request.getContextPath() + "/user/index");
+            session.setAttribute("isAdmin", users.isAdmin());
+            response.sendRedirect(request.getContextPath() + "/Admin/AdminDashboardServlet");
             return;
         } else {
-            request.getRequestDispatcher("/views/login.jsp").forward(request, response);
+            request.getRequestDispatcher("/views/site/account/login.jsp").forward(request, response);
         }
     }
     private void signInPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             LoginUser loginUser = new LoginUser();
             BeanUtils.populate(loginUser, request.getParameterMap());
-            UserService userService = new UserService();
             Users users = userService.findByID(loginUser.getId());
 
             if(!users.getPassword().equals(loginUser.getPassword())) {
                 request.setAttribute("message", "Invalid password");
-                request.getRequestDispatcher("/views/login.jsp").forward(request, response);
+                request.getRequestDispatcher("/views/site/account/login.jsp").forward(request, response);
             } else {
                 HttpSession session = request.getSession();
                 session.setAttribute("username", loginUser.getId());
+                session.setAttribute("isAdmin", users.isAdmin());
                 if (loginUser.isRemember()) {
-                    CookieUtils.add("username", loginUser.getId(),
-                            2, response);
+                    CookieUtils.add("username", loginUser.getId(),2, response);
                 } else {
-                    CookieUtils.add("username", loginUser.getId(),
-                            0, response);
+                    CookieUtils.add("username", loginUser.getId(),0, response);
                 }
-                response.sendRedirect(request.getContextPath() +
-                        "/user/index");
+                if (users.isAdmin()) {
+                    response.sendRedirect(request.getContextPath() + "/Admin/AdminDashboardServlet");
+                } else {
+                    response.sendRedirect(request.getContextPath() + "/HomePageServlet");
+                }
+
             }
         } catch (Exception e) {
             e.printStackTrace();
             request.setAttribute("message", "Invalid username or password");
-            request.getRequestDispatcher("/views/login.jsp").forward(request, response);
+            request.getRequestDispatcher("/views/site/account/login.jsp").forward(request, response);
         }
     }
     private void createUser(HttpServletRequest request) {

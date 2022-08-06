@@ -19,9 +19,12 @@
     <!-- Google Fonts Roboto -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" />
     <!-- MDB -->
-    <link rel="stylesheet" href="../assets/css/mdb.min.css"/>
+    <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.3.0/mdb.min.css"
+            rel="stylesheet"
+    />
     <!-- Custom styles -->
-    <link rel="stylesheet" href="../assets/css/style.css" />
+    <link rel="stylesheet" href="../../../assets/css/style.css" />
 </head>
 <body>
 <!--Main Navigation-->
@@ -45,7 +48,7 @@
     </style>
 
     <!-- Navbar -->
-    <%@include file="../views/partials/navbar.jsp" %>
+    <%@include file="../../partials/navbar.jsp" %>
     <!-- Navbar -->
 
     <!-- Background image -->
@@ -124,11 +127,14 @@
 <!--Main Navigation-->
 
 <!--Footer-->
-<%@include file="../views/partials/footer.jsp" %>
+<%@include file="../../partials/footer.jsp" %>
 <!--Footer-->
 <!-- MDB -->
-<script type="text/javascript" src="../assets/js/mdb.min.js"></script>
+<script
+        type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.3.0/mdb.min.js"
+></script>
 <!-- Custom scripts -->
-<script type="text/javascript" src="../assets/js/script.js"></script>
+<script type="text/javascript" src="../../../../assets/js/script.js"></script>
 </body>
 </html>

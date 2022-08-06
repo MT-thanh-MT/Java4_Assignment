@@ -9,62 +9,83 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- Navbar -->
 <style>
-  .navbar .nav-link {
-    color: #fff !important;
-  }
+    .navbar .nav-link {
+        color: #fff !important;
+    }
 </style>
 <nav class="navbar navbar-expand-lg navbar-dark d-none d-lg-block bg-dark" style="z-index: 2000;">
-  <div class="container-fluid">
-    <!-- Navbar brand -->
-    <a class="navbar-brand nav-link" target="_blank" href="#">
-      <img src="<c:url value="/assets/images/mainLogo.png"/>" alt="logo">
-    </a>
-    <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarExample01"
-            aria-controls="navbarExample01" aria-expanded="false" aria-label="Toggle navigation">
-      <i class="fas fa-bars"></i>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarExample01">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item active">
-          <a class="nav-link" aria-current="page" href="<c:url value="/account/sign-in" />">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="https://www.youtube.com/channel/UC5CF7mLQZhvx8O5GODZAhdA" rel="nofollow"
-             target="_blank">Learn Bootstrap 5</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="https://mdbootstrap.com/docs/standard/" target="_blank">Download MDB UI KIT</a>
-        </li>
-      </ul>
+    <div class="container-fluid">
+        <!-- Navbar brand -->
+        <a class="navbar-brand nav-link" href="<c:url value="/HomePageServlet" />">
+            <img src="<c:url value="/assets/images/mainLogo.png"/>" alt="logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarExample01"
+                aria-controls="navbarExample01" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarExample01">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item" id="Home">
+                    <a class="nav-link" aria-current="page" href="<c:url value="/HomePageServlet" />"><i
+                            class="fas fa-home"></i>&nbspHome</a>
+                </li>
+                <li class="nav-item" id="About">
+                    <a class="nav-link" href="" rel="nofollow">
+                        <i class="fas fa-address-card"></i>&nbspAbout Us
+                    </a>
+                </li>
+                <li class="nav-item" id="Contact">
+                    <a class="nav-link" href=""><i class="far fa-comment"></i>&nbspContact Us</a>
+                </li>
+                <li class="nav-item" id="Favorites">
+                    <a class="nav-link" href=""><i class="far fa-grin-hearts"></i>&nbspMy Favorites</a>
+                </li>
 
-      <ul class="navbar-nav d-flex flex-row ms-lg-n5">
-        <!-- Icon dropdown -->
-        <li class="nav-item me-3 me-lg-0 dropdown">
-          <a
-                  class="nav-link dropdown-toggle"
-                  href="#"
-                  id="navbarDropdown"
-                  role="button"
-                  data-mdb-toggle="dropdown"
-                  aria-expanded="false"
-          >
-            <i class="fas fa-user"></i> My Account
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li>
-              <a class="dropdown-item" href="#">Action</a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="#">Another action</a>
-            </li>
-            <li><hr class="dropdown-divider" /></li>
-            <li>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </li>
-          </ul>
-        </li>
-      </ul>
+                <c:if test="${isAdmin == true}">
+                    <li class="nav-item">
+                        <a class="nav-link" href="<c:url value="/Admin/AdminDashboardServlet" />"><i class="far fa-grin-hearts"></i>&nbspAdministration Tool</a>
+                    </li>
+                </c:if>
+            </ul>
+
+            <!-- Right elements -->
+            <ul class="navbar-nav flex-row">
+
+                <li class="nav-item dropdown me-3 me-lg-1">
+                    <a class="nav-link dropdown-toggle " href="#" id="navbarDropdownMenuLink" role="button"
+                       data-mdb-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-user"></i>&nbsp ${username == null ? "Login":"Hello, " += username}
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+                        <c:choose>
+                            <c:when test="${ username == null}">
+                                <li>
+                                    <a class="dropdown-item" href="<c:url value="/account/sign-in" />">Login</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="<c:url value="/account/sign-in" />">Forgot password</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="<c:url value="/account/sign-up" />">Register</a>
+                                </li>
+                            </c:when>
+                            <c:when test="${ username != null}">
+                                <li>
+                                    <a class="dropdown-item" href="<c:url value="/account/sign-out" />">Logout</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#">Change password</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#">Profile</a>
+                                </li>
+                            </c:when>
+                        </c:choose>
+                    </ul>
+                </li>
+            </ul>
+            <!-- Right elements -->
+        </div>
     </div>
-  </div>
 </nav>
 <!-- Navbar -->

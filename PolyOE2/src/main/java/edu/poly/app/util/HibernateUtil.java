@@ -1,6 +1,9 @@
 package edu.poly.app.util;
 
+import edu.poly.app.model.Favorite;
+import edu.poly.app.model.Share;
 import edu.poly.app.model.Users;
+import edu.poly.app.model.Videos;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -25,6 +28,9 @@ public class HibernateUtil {
 
         conf.setProperties(pros);
         conf.addAnnotatedClass(Users.class);
+        conf.addAnnotatedClass(Videos.class);
+        conf.addAnnotatedClass(Favorite.class);
+        conf.addAnnotatedClass(Share.class);
 
         ServiceRegistry registry = new StandardServiceRegistryBuilder().applySettings(conf.getProperties()).build();
 
