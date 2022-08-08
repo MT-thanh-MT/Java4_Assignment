@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@Table(name = "favorites")
+@Table(name = "favorites", uniqueConstraints = {@UniqueConstraint(columnNames = {"videoid","userid"})})
 public class Favorite implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

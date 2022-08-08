@@ -25,9 +25,12 @@ public class AccountServlet extends HttpServlet {
         } else if (uri.contains("sign-up")) {
             request.getRequestDispatcher("/views/site/account/register.jsp").forward(request, response);
         } else if (uri.contains("sign-out")) {
+            request.getSession().removeAttribute("userLogin");
             request.getSession().removeAttribute("username");
             request.getSession().removeAttribute("isAdmin");
             response.sendRedirect(request.getContextPath() + "/HomePageServlet");
+        } else if (uri.contains("edit-profile")) {
+            request.getRequestDispatcher("/views/site/account/editProfile.jsp").forward(request, response);
         }
     }
     @Override
@@ -38,6 +41,9 @@ public class AccountServlet extends HttpServlet {
         } else if (uri.contains("sign-up")) {
             createUser(request);
             request.getRequestDispatcher("/views/site/account/register.jsp").forward(request, response);
+        } else if (uri.contains("edit-profile")) {
+            updateProfileUser(request);
+            request.getRequestDispatcher("/views/site/account/editProfile.jsp").forward(request, response);
         }
     }
     private void signInGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -46,6 +52,7 @@ public class AccountServlet extends HttpServlet {
         if (username != null && !username.equals("")) {
             request.setAttribute("massage","Login successfuly!!!");
             HttpSession session = request.getSession();
+            session.setAttribute("userLogin", users);
             session.setAttribute("username", username);
             session.setAttribute("isAdmin", users.isAdmin());
             response.sendRedirect(request.getContextPath() + "/Admin/AdminDashboardServlet");
@@ -65,6 +72,7 @@ public class AccountServlet extends HttpServlet {
                 request.getRequestDispatcher("/views/site/account/login.jsp").forward(request, response);
             } else {
                 HttpSession session = request.getSession();
+                session.setAttribute("userLogin", users);
                 session.setAttribute("username", loginUser.getId());
                 session.setAttribute("isAdmin", users.isAdmin());
                 if (loginUser.isRemember()) {
@@ -100,4 +108,26 @@ public class AccountServlet extends HttpServlet {
             request.setAttribute("error", "Error: " + e.getMessage());
         }
     }
+
+
+    private void updateProfileUser(HttpServletRequest request) {
+        try {
+            Users user = new Users();
+            BeanUtils.populate(user, request.getParameterMap());
+            Users oldUser = (Users) request.getSession().getAttribute("userLogin");
+            if (oldUser == null) {
+                request.setAttribute("error", "Error: Username not exists!");
+            } else {
+                oldUser.setEmail(user.getEmail());
+                oldUser.setFullname(user.getFullname());
+                us.update(oldUser);
+                request.setAttribute("messenger", "Update successfully!");
+                request.getSession().setAttribute("userLogin", oldUser);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            request.setAttribute("error", "Error: " + e.getMessage());
+        }
+    }
+
 }

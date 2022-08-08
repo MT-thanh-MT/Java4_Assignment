@@ -37,13 +37,15 @@
                 <li class="nav-item" id="Contact">
                     <a class="nav-link" href=""><i class="far fa-comment"></i>&nbspContact Us</a>
                 </li>
-                <li class="nav-item" id="Favorites">
-                    <a class="nav-link" href=""><i class="far fa-grin-hearts"></i>&nbspMy Favorites</a>
-                </li>
-
+                <c:if test="${ username != null}">
+                    <li class="nav-item" id="Favorites">
+                        <a class="nav-link" href=""><i class="far fa-grin-hearts"></i>&nbspMy Favorites</a>
+                    </li>
+                </c:if>
                 <c:if test="${isAdmin == true}">
                     <li class="nav-item">
-                        <a class="nav-link" href="<c:url value="/Admin/AdminDashboardServlet" />"><i class="far fa-grin-hearts"></i>&nbspAdministration Tool</a>
+                        <a class="nav-link" href="<c:url value="/Admin/AdminDashboardServlet" />"><i
+                                class="far fa-grin-hearts"></i>&nbspAdministration Tool</a>
                     </li>
                 </c:if>
             </ul>
@@ -54,7 +56,7 @@
                 <li class="nav-item dropdown me-3 me-lg-1">
                     <a class="nav-link dropdown-toggle " href="#" id="navbarDropdownMenuLink" role="button"
                        data-mdb-toggle="dropdown" aria-expanded="false">
-                        <i class="fas fa-user"></i>&nbsp ${username == null ? "Login":"Hello, " += username}
+                        <i class="fas fa-user"></i>&nbsp ${username == null ? "Login":"Hello, " += userLogin.fullname}
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
                         <c:choose>
@@ -63,7 +65,8 @@
                                     <a class="dropdown-item" href="<c:url value="/account/sign-in" />">Login</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="<c:url value="/account/sign-in" />">Forgot password</a>
+                                    <a class="dropdown-item" href="<c:url value="/account/sign-in" />">Forgot
+                                        password</a>
                                 </li>
                                 <li>
                                     <a class="dropdown-item" href="<c:url value="/account/sign-up" />">Register</a>
@@ -77,7 +80,7 @@
                                     <a class="dropdown-item" href="#">Change password</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="#">Profile</a>
+                                    <a class="dropdown-item" href="<c:url value="/account/edit-profile" />">Profile</a>
                                 </li>
                             </c:when>
                         </c:choose>

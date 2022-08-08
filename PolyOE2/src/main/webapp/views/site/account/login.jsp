@@ -27,6 +27,15 @@
     <link rel="stylesheet" href="../../../assets/css/style.css" />
 </head>
 <body>
+<c:if test="${not empty sessionScope.securi}">
+    <script>
+        swal({
+            title: "Oh MY GOD!",
+            text: "${sessionScope.securi}",
+            icon: "error",
+        });
+    </script>
+</c:if>
 <!--Main Navigation-->
 <header>
     <style>

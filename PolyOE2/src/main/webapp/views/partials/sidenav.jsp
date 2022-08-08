@@ -18,7 +18,7 @@
     <ul class="nav_list">
         <li>
             <a href="<c:url value="/HomePageServlet" />">
-                <i class='bx bx-grid-alt'></i>
+                <i class='bx bxs-home-heart'></i>
                 <span class="links_name">Home</span>
             </a>
             <span class="tooltip">Home</span>
@@ -45,7 +45,7 @@
             <span class="tooltip">Video Management</span>
         </li>
         <li>
-            <a href="">
+            <a href="<c:url value="/Admin/ReportsManagementServlet" />">
                 <i class='bx bxs-report'></i>
                 <span class="links_name">Reports Management</span>
             </a>
@@ -57,7 +57,7 @@
             <div class="profile_details">
                 <img src="<c:url value="/assets/images/me.jpg" />" alt="...">
                 <div class="name_job">
-                    <div class="name">Thani</div>
+                    <div class="name">${userLogin.fullname}</div>
                     <div class="job">Admin</div>
                 </div>
             </div>

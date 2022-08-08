@@ -85,4 +85,8 @@ public class Videos implements Serializable {
     public void setViews(int views) {
         this.views = views;
     }
+
+    public int getLikeCount(){
+        return this.favorites.size();
+    }
 }

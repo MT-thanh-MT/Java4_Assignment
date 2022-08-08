@@ -21,6 +21,10 @@ public class HomePageServlet extends HttpServlet {
             Videos video = new Videos();
             String id = request.getParameter("id");
             video = VS.findByID(id);
+            if (request.getSession().getAttribute("userLogin") != null) {
+                video.setViews(video.getViews()+1);
+                VS.update(video);
+            }
             video.setPoster("/" + video.getPoster());
             request.setAttribute("video", video);
             findAll(request,response);

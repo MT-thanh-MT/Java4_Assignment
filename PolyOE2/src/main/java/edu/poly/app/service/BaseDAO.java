@@ -11,24 +11,45 @@ public abstract class BaseDAO<T, Key> {
     public abstract String getHQuery(String action);
     public abstract Object[] getParameters(String action, T entity);
     public void create(T entity) {
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try{
             session.getTransaction().begin();
             session.save(entity);
             session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+            throw e;
+        } finally {
+            session.close();
         }
     }
     public void update(T entity) {
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
             session.getTransaction().begin();
             session.update(entity);
             session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+            throw e;
+        } finally {
+            session.close();
         }
     }
     public void delete(T entity) {
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
             session.getTransaction().begin();
             session.delete(entity);
             session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+            throw e;
+        } finally {
+            session.close();
         }
     }
     public List<T> findAll() {

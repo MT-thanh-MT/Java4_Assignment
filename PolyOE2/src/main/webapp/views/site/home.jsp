@@ -13,7 +13,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>sign-in</title>
+    <title>Home</title>
+    <!-- Icons -->
+    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'/>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
     <!-- Google Fonts Roboto -->
@@ -22,8 +24,27 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.3.0/mdb.min.css" rel="stylesheet"/>
     <!-- Custom styles -->
     <link rel="stylesheet" href="../../../assets/css/style.css" />
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body>
+<c:if test="${not empty error}">
+    <script>
+        swal({
+            title: "Ohhhhh!",
+            text: "${error}",
+            icon: "error",
+        });
+    </script>
+</c:if>
+<c:if test="${not empty massage}">
+    <script>
+        swal({
+            title: "Oh MY GOD!",
+            text: "${massage}",
+            icon: "success",
+        });
+    </script>
+</c:if>
 <!--Main Navigation-->
 <%@include file="../partials/header.jsp" %>
 <!--Main Navigation-->
@@ -36,11 +57,13 @@
                 </div>
                 <div class="card-body">
                     <a href="<c:url value="/HomePageServlet/Detail?id=${ video.id }" />">
-                        <img src="<c:url value="${video.poster}" />" alt="" width="100%" height="240px">
+                        <img src="<c:url value="/${video.poster}" />" alt="" width="100%" height="240px">
                     </a>
                 </div>
-                <div class="card-footer">
-                    LIKE-SHARE
+                <div class="card-footer text-center">
+                    <div class="float-start">Views: ${video.views}</div>
+                    <a href="<c:url value="/LikeVideoServlet/home?id=${video.id}"/> " class="btn btn-primary"><i class='bx bxs-like'></i></a>
+                    <a href="" class="btn btn-info"><i class='bx bxs-share-alt'></i></a>
                 </div>
             </div>
         </div>
