@@ -39,7 +39,7 @@
                 </li>
                 <c:if test="${ username != null}">
                     <li class="nav-item" id="Favorites">
-                        <a class="nav-link" href=""><i class="far fa-grin-hearts"></i>&nbspMy Favorites</a>
+                        <a class="nav-link" href="<c:url value="/FavoriteServlet" />"><i class="far fa-grin-hearts"></i>&nbspMy Favorites</a>
                     </li>
                 </c:if>
                 <c:if test="${isAdmin == true}">

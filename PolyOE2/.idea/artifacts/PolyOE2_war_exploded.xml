@@ -40,6 +40,8 @@
           <element id="library" level="project" name="Maven: com.sun.mail:javax.mail:1.6.0" />
           <element id="library" level="project" name="Maven: javax.activation:activation:1.1" />
           <element id="library" level="project" name="Maven: commons-io:commons-io:2.7" />
+          <element id="library" level="project" name="Maven: com.sun.mail:jakarta.mail:2.0.1" />
+          <element id="library" level="project" name="Maven: com.sun.activation:jakarta.activation:2.0.1" />
         </element>
       </element>
       <element id="directory" name="META-INF">

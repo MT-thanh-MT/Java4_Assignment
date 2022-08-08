@@ -181,7 +181,64 @@
                     </div>
                 </div>
                 <div class="tab-pane fade ${selectedTab == 3 ? 'show active':''}" id="ex1-tabs-3" role="tabpanel" aria-labelledby="ex1-tab-3">
-                    Tab 3 content
+                    <div class="col-sm-12">
+                        <div>
+                            <form action="Admin/ReportsManagementServlet" method="get">
+                                <div class="row mt3">
+                                    <div class="col">
+                                        <div class="form-check">
+
+                                            <label class="form-label" for="videoID">
+                                                Video Title</label>
+                                            <div class="form-check form-check-inline">
+                                                <select name="videoID" id="videoID"
+                                                        class="browser-default custom-select ml-3">
+                                                    <c:forEach var="item" items="${listVideo}">
+                                                        <option value="${item.id}" ${item.id == videoID ? 'selected':''}>
+                                                                ${item.title}
+                                                        </option>
+                                                    </c:forEach>
+                                                </select>
+
+                                                <button type="submit" class="btn btn-info ml-2" formaction="ReportUserByVideo">Report</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <table class="table table-bordered border-dark">
+                            <thead class="table-dark">
+                            <tr>
+                                <th scope="col">Sender Name</th>
+                                <th scope="col">Sender Email</th>
+                                <th scope="col">Receiver Email</th>
+                                <th scope="col">Sent Date</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <c:forEach var="item" items="${favUserList}">
+                                <tr>
+                                    <th>${ item.fullname }</th>
+                                    <td>${ item.email }</td>
+                                    <td>${ item.email }</td>
+                                    <td>${ item.likeDate }</td>
+                                </tr>
+                            </c:forEach>
+                            </tbody>
+                        </table>
+                        <div class="d-flex justify-content-center">
+
+                            <ul class="pagination">
+                                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                            </ul>
+
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- Tabs content -->

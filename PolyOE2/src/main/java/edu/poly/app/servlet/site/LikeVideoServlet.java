@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
-@WebServlet({"/LikeVideoServlet/home", "/LikeVideoServlet/detail"})
+@WebServlet({"/LikeVideoServlet/home", "/LikeVideoServlet/detail", "/LikeVideoServlet/favorite"})
 public class LikeVideoServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private final VideoService VS = new VideoService();

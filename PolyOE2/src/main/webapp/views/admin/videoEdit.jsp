@@ -23,7 +23,7 @@
     <!-- Custom styles -->
     <style>
         <%@include file="/assets/css/style.css" %>
-        .row{
+        .row {
             margin: 0;
         }
     </style>
@@ -54,8 +54,8 @@
                     </div>
                     <div class="mb-3">
                         <label for="description" class="form-label">Description</label>
-<%--                        <input type="text" name="description" class="form-control" id="description" value="${video.description}" required>--%>
-                        <textarea name="description" class="form-control" id="description" rows="4" cols="50">${video.description}</textarea>
+                        <textarea name="description" class="form-control" id="description" rows="4"
+                                  cols="50">${video.description}</textarea>
                     </div>
                     <div class="mb-3 form-check">
                         <div class="form-check form-check-inline">
@@ -72,7 +72,8 @@
                     <div class="mb-3">
                         <label class="form-label">Poster</label>
                         <img class="form-control" id="output" src="<c:url value="${video.poster}" />"/>
-                        <input class="form-control" name="poster" value="${video.poster}" type="file" accept="image/*" onchange="loadFile(event)" placeholder="choose poster">
+                        <input class="form-control" name="poster" value="${video.poster}" type="file" accept="image/*"
+                               onchange="loadFile(event)" placeholder="choose poster">
                     </div>
                     <div class="row m-0">
                         <div class="col-sm-12 p-0">
@@ -163,9 +164,9 @@
     <%@include file="/assets/js/sidenavJS.js" %>
 </script>
 <script>
-    var loadFile = function(event) {
+    var loadFile = function (event) {
         var reader = new FileReader();
-        reader.onload = function(){
+        reader.onload = function () {
             var output = document.getElementById('output');
             output.src = reader.result;
         };

@@ -22,6 +22,13 @@ public class Videos implements Serializable {
     @OneToMany(mappedBy = "video")
     private List<Share> shares;
 
+    public Videos() {
+    }
+
+    public Videos(String id) {
+        this.id = id;
+    }
+
     public List<Favorite> getFavorites() {
         return favorites;
     }

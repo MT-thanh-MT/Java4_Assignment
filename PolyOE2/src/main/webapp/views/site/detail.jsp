@@ -61,7 +61,7 @@
                 <div class="card-footer text-center">
                     <div class="float-start">Views: ${video.views}</div>
                     <a href="<c:url value="/LikeVideoServlet/detail?id=${video.id}"/> " class="btn btn-primary"><i class='bx bxs-like'></i></a>
-                    <a href="" class="btn btn-info"><i class='bx bxs-share-alt'></i></a>
+                    <a href="<c:url value="/ShareVideoServlet/detail?videoId=${video.id}"/>" class="btn btn-info"><i class='bx bxs-share-alt'></i></a>
                 </div>
             </div>
             <div class="container">

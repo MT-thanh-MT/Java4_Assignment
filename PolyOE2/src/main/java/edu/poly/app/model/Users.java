@@ -21,6 +21,13 @@ public class Users implements Serializable{
     @OneToMany(mappedBy = "user")
     private List<Share> shares;
 
+    public Users() {
+    }
+
+    public Users(String id) {
+        this.id = id;
+    }
+
     public List<Favorite> getFavorites() {
         return favorites;
     }
