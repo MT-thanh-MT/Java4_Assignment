@@ -51,17 +51,17 @@
 <div class="container">
     <div class="row">
         <c:forEach var="video" items="${listVideo}">
-            <div class="col-sm-3 mb-3 mt-3">
+            <div class="col-sm-4 mb-3 mt-3">
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header bg-success bg-opacity-50">
                             ${video.title}
                     </div>
-                    <div class="card-body">
+                    <div class="card-body text-center bg-dark" height="240px">
                         <a href="<c:url value="/HomePageServlet/Detail?id=${ video.id }" />">
-                            <img src="<c:url value="/${video.poster}" />" alt="" width="100%" height="240px">
+                            <img src="<c:url value="/${video.poster}" />" alt="" style="max-width: 100%" height="240px">
                         </a>
                     </div>
-                    <div class="card-footer text-center">
+                    <div class="card-footer text-center bg-info bg-opacity-50">
                         <div class="float-start">Views: ${video.views}</div>
                         <a href="<c:url value="/LikeVideoServlet/home?id=${video.id}"/> " class="btn btn-primary"><i
                                 class='bx bxs-like'></i></a>

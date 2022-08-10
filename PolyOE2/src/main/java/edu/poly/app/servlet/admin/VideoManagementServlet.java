@@ -61,7 +61,7 @@ public class VideoManagementServlet extends HttpServlet {
             request.setAttribute("messenger", "Create successful");
         } catch (Exception e) {
             e.printStackTrace();
-            request.setAttribute("error", "Error: " + e.getMessage());
+            request.setAttribute("error", "Error: VideoID is exited!");
         }
 
     }

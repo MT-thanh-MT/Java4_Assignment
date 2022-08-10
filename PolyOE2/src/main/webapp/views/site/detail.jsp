@@ -48,23 +48,26 @@
 <!--Main Navigation-->
 <%@include file="../partials/header.jsp" %>
 <!--Main Navigation-->
-<div class="row">
+<div class="row ms-2">
         <div class="col-sm-8 mb-3 mt-3">
             <div class="card">
-                <div class="card-header fs-3">
+                <div class="card-header fs-3  bg-success bg-opacity-50">
                         ${video.title}
                 </div>
                 <div class="card-body">
                     <iframe src="https://www.youtube.com/embed/${video.id}" style="width: 100%; height: 80vh">
                     </iframe>
                 </div>
-                <div class="card-footer text-center">
+                <div class="card-footer text-center bg-info bg-opacity-50">
                     <div class="float-start">Views: ${video.views}</div>
                     <a href="<c:url value="/LikeVideoServlet/detail?id=${video.id}"/> " class="btn btn-primary"><i class='bx bxs-like'></i></a>
                     <a href="<c:url value="/ShareVideoServlet/detail?videoId=${video.id}"/>" class="btn btn-info"><i class='bx bxs-share-alt'></i></a>
                 </div>
             </div>
+            <br>
+            <hr>
             <div class="container">
+                <h1>Description:</h1>
                 ${video.description}
             </div>
         </div>
@@ -75,9 +78,9 @@
                     <div class="card-header">
                             ${video.title}
                     </div>
-                    <div class="card-body">
+                    <div class="card-body text-center">
                         <a href="<c:url value="/HomePageServlet/Detail?id=${ video.id }" />">
-                            <img src="<c:url value="/${video.poster}" />" alt="" width="100%" height="240px">
+                            <img src="<c:url value="/${video.poster}" />" alt="" style="max-width: 100%" height="240px">
                         </a>
                     </div>
                     <div class="card-footer">
